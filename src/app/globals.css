@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+/* ─── カスタムプロパティ ─────────────────────────────────────────── */
+:root {
+  --c-navy:   #0c2340;
+  --c-navy-d: #071a30;
+  --c-sky:    #38bdf8;   /* sky-400: 唯一のアクセントカラー */
+}
+
+/* ─── ベーススタイル ──────────────────────────────────────────────── */
+body {
+  background: #ffffff;
+  color: #0f172a;               /* slate-900 */
+  font-family:
+    "Hiragino Kaku Gothic ProN", "Hiragino Sans",
+    "Noto Sans JP", "Meiryo", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.75;
+}
+
+html { scroll-behavior: smooth; }
+
+/* ─── グリッド背景（セクション用）─────────────────────────────────── */
+.grid-bg {
+  background-color: #f8fafc;
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ─── スクロールリビール ──────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── カード共通 ──────────────────────────────────────────────────── */
+.card {
+  background: #fff;
+  border-radius: 0.375rem;      /* rounded-md */
+  border: 1px solid #e2e8f0;   /* slate-200 */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.03);
+  transition: box-shadow 0.2s ease;
+}
+.card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.05);
+}
+
+/* ─── ボトムナビ余白（スマホ用）──────────────────────────────────── */
+.pb-bottom-nav { padding-bottom: 5rem; }
+
+/* ─── Hero パララックス ──────────────────────────────────────────── */
+/*
+  CSS Scroll-Driven Animations を使用。
+  view() タイムラインはヒーロー要素がビューポートを通過する間だけ動作する。
+  prefers-reduced-motion ブロック外には一切の transform を与えない（完全フォールバック）。
+*/
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes hero-parallax {
+    from { transform: scale(1.1) translateY(-4%); }
+    to   { transform: scale(1.1) translateY( 4%); }
+  }
+
+  .hero-bg-img {
+    will-change: transform;         /* GPU レイヤーに昇格、JS リペイント不要 */
+    animation: hero-parallax linear both;
+    animation-timeline: view(block); /* ヒーローのスクロール通過で進行 */
+    /* animation-range: default = cover 0% cover 100%
+       = スクロール0（ページ先頭）〜 100vh スクロール時点 */
+  }
+}
