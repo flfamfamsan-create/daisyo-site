@@ -11,6 +11,10 @@ export const metadata: Metadata = {
     "東京都西多摩郡日の出町を拠点に、多摩地区で上下水道工事・土木工事を行う株式会社大翔工業。水漏れ修繕・配管工事・掘削工事など、まずはお気軽にご相談ください。",
   keywords:
     "上下水道工事,土木工事,水道工事,西多摩,日の出町,青梅市,あきる野市,羽村市,漏水修繕,配管工事",
+  robots: {
+    index: false,
+    follow: false,
+  },
   openGraph: {
     title: "株式会社 大翔工業 | 多摩地区の上下水道工事・土木工事",
     description:
